@@ -1,22 +1,10 @@
-# Lab Activity 1: Software Tools, Standards, and Git Version Control
+# Lab Activity 1: Software Relevant Tools, Standards, and Code Versioning using GitHub
 
 ## Overview
 
 This repository documents the completion of Lab Activity 1 for **CPE106L-4 Software Design Laboratory**. The activity focused on preparing a clean Python laboratory workspace, using an isolated Python environment, organizing source and test files, establishing a Git repository, and recording evidence of basic version-control operations.
 
 A simple command-line calculator was used as the Python program for demonstrating the required workspace, execution, testing, documentation, and Git workflow.
-
-## Objectives
-
-The activity was completed to demonstrate the following objectives:
-
-1. Create a clean and organized Python laboratory workspace.
-2. Prepare an isolated Python environment for the project.
-3. Develop and test a basic Python program.
-4. Initialize and maintain a local Git repository.
-5. Connect the local repository to GitHub.
-6. Perform and document basic Git operations, including staging, committing, pulling, rebasing, and pushing changes.
-7. Submit evidence of program execution, testing, environment configuration, and version-control history.
 
 ## Laboratory Environment
 
@@ -224,10 +212,6 @@ Git commit-history evidence is stored in:
 screenshots/github_commit_history.png
 ```
 
-The remote repository is available at:
-
-https://github.com/Rectorify/CPE106L_LAB-1
-
 ## Evidence Summary
 
 The project evidence is organized in the `screenshots/` directory:
@@ -242,21 +226,3 @@ The project evidence is organized in the `screenshots/` directory:
 The activity produced an organized Python workspace with separate source, test, documentation, and evidence components. An isolated Conda environment was used in place of WSL because of laboratory administrator restrictions. The calculator executed correctly, and all 25 automated tests passed.
 
 The Git repository documented the development process through multiple meaningful commits and was synchronized with GitHub. The screenshots provide evidence of environment activation, program execution, automated testing, and basic version-control operations.
-
-## Submission Contents
-
-The submitted project folder contains:
-
-```text
-README.md
-src/calculator.py
-tests/test_calculator.py
-screenshots/
-```
-
-The complete folder is uploaded to the designated Drive location with link access enabled for evaluation. The GitHub repository provides an additional copy of the source files and the recorded version-control history.
-
-## Author
-
-**John Steven B. Calara**  
-CPE106L-4 Software Design Laboratory
