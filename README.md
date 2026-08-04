@@ -1,31 +1,48 @@
-# Lab Activity 1: Software Relevant Tools, Standards, and Code Versioning using GitHub
+# Lab Activity 1: Software Tools, Standards, and Git Version Control
 
-## Project Overview
+## Overview
 
-The project demonstrates source-code organization, input validation, automated testing, environment management, and version control. The calculator processes a single arithmetic expression composed of two numeric operands and one supported operator.
+This repository documents the completion of Lab Activity 1 for **CPE106L-4 Software Design Laboratory**. The activity focused on preparing a clean Python laboratory workspace, using an isolated Python environment, organizing source and test files, establishing a Git repository, and recording evidence of basic version-control operations.
 
-## Development Environment
+A simple command-line calculator was used as the Python program for demonstrating the required workspace, execution, testing, documentation, and Git workflow.
 
-The project was developed and tested on a Windows computer in the laboratory using **Anaconda** and an isolated Conda environment named `calara_lab1`.
+## Objectives
 
-Ubuntu WSL was listed among the tools for the activity but was unavailable because its use was restricted by the laboratory computer's administrator permissions. Anaconda provided the Python environment used to execute the application and its automated tests.
+The activity was completed to demonstrate the following objectives:
 
-The recorded environment configuration was:
+1. Create a clean and organized Python laboratory workspace.
+2. Prepare an isolated Python environment for the project.
+3. Develop and test a basic Python program.
+4. Initialize and maintain a local Git repository.
+5. Connect the local repository to GitHub.
+6. Perform and document basic Git operations, including staging, committing, pulling, rebasing, and pushing changes.
+7. Submit evidence of program execution, testing, environment configuration, and version-control history.
+
+## Laboratory Environment
+
+The prescribed activity identified Ubuntu WSL as the intended workspace. However, WSL was unavailable on the laboratory computer because its use required administrator permissions. To complete the environment-management objective, **Anaconda Prompt** and a Conda environment named `calara_lab1` were used as the permitted alternative.
+
+The recorded laboratory environment was:
 
 ```text
-Environment: calara_lab1
-Platform: Windows (win32)
-Python: 3.12.13
-pytest: 9.1.1
+Operating platform: Windows (win32)
+Environment manager: Anaconda / Conda
+Environment name: calara_lab1
+Python version: 3.12.13
+pytest version: 9.1.1
 ```
 
-The Python interpreter used during testing was located at:
+The active Python interpreter during testing was:
 
 ```text
 C:\Users\jsbcalara1\.conda\envs\calara_lab1\python.exe
 ```
 
-## Repository Structure
+The use of Conda preserved the main purpose of the virtual-environment objective by isolating the Python interpreter and test dependencies from the base environment.
+
+## Workspace Organization
+
+The project uses separate directories for source code, automated tests, and supporting evidence.
 
 ```text
 calara_johnsteven_labactivity1/
@@ -41,152 +58,205 @@ calara_johnsteven_labactivity1/
 └── README.md
 ```
 
-### Directory and File Descriptions
+### Workspace Components
 
-- `src/calculator.py` contains the calculator application and its validation logic.
-- `tests/test_calculator.py` contains the automated validation and resilience tests.
-- `screenshots/` contains terminal and repository evidence collected during the activity.
-- `README.md` documents the project, environment, behavior, testing, and results.
+- `src/calculator.py` contains the Python calculator program.
+- `tests/test_calculator.py` contains the automated input-validation and resilience tests.
+- `screenshots/` contains evidence of the environment, program execution, test results, and Git history.
+- `README.md` documents the completed activity and its results.
 
-## Program Specification
+Temporary Python files and cache directories, such as `__pycache__/` and `.pytest_cache/`, are not part of the required project deliverables.
 
-The calculator accepts input in the following structure:
+## Python Environment
+
+The isolated project environment was created and activated through Conda. The relevant environment operations were:
+
+```powershell
+conda create --name calara_lab1 python=3.12
+conda activate calara_lab1
+python -m pip install pytest
+```
+
+Environment activation was verified using:
+
+```powershell
+conda info --envs
+python --version
+where python
+```
+
+The verification output showed `calara_lab1` as the active environment and confirmed that Python was executed from the environment-specific interpreter path.
+
+After a development or testing session, the environment can be closed with:
+
+```powershell
+conda deactivate
+```
+
+Evidence of the active environment is stored in:
+
+```text
+screenshots/conda_environment_activation.png
+```
+
+## Demonstration Program
+
+The project uses a command-line calculator to demonstrate Python development and testing within the prepared workspace.
+
+The calculator accepts expressions in the following format:
 
 ```text
 <number> <operator> <number>
 ```
 
-The operands and operator are separated by spaces. Numeric inputs are converted to floating-point values before calculation.
+The supported operators are:
 
-### Supported Operators
+- `+` for addition
+- `-` for subtraction
+- `*` for multiplication
+- `/` for division
+- `%` for modulo
 
-- `+` — addition
-- `-` — subtraction
-- `*` — multiplication
-- `/` — division
-- `%` — modulo
+A valid expression produces a floating-point result. Invalid expressions produce the message `invalid` without exposing an unhandled traceback during normal execution.
 
-### Output Behavior
+The program validates malformed expressions, unsupported operators, non-numeric operands, non-finite values, and division or modulo by zero.
 
-A valid expression produces a numeric result:
-
-```text
-Input:  2 + 3
-Output: 5.0
-```
-
-Input that fails validation produces:
-
-```text
-invalid
-```
-
-## Input Validation and Resilience
-
-The application rejects input under the following conditions:
-
-- The expression does not contain exactly three elements.
-- Either operand cannot be converted to a number.
-- The operator is not supported.
-- Division or modulo by zero is attempted.
-- Either operand is `NaN`, positive infinity, or negative infinity.
-- The calculated result is not a finite floating-point value.
-
-Invalid input is handled without exposing an unhandled traceback during normal program execution.
-
-## Application Execution
-
-The calculator is executed from the project root with:
+The application was executed from the project root using:
 
 ```powershell
 python src\calculator.py
 ```
 
-The application then reads one expression from standard input, validates it, performs the requested operation, and prints the result or `invalid`.
+## Program Execution Evidence
 
-## Documented Sample Runs
-
-The following cases represent the calculator behavior recorded during the activity.
-
-### Valid Addition
+The documented sample runs include valid and invalid expressions.
 
 ```text
 Input:  2 + 3
 Output: 5.0
-```
 
-### Valid Division
-
-```text
 Input:  10 / 2
 Output: 5.0
-```
 
-### Division by Zero
-
-```text
 Input:  10 / 0
 Output: invalid
-```
 
-### Invalid Operand
-
-```text
 Input:  one + 2
 Output: invalid
 ```
 
-Evidence of the command-line executions is stored in `screenshots/calculator_sample_runs.png`.
+The corresponding terminal evidence is stored in:
+
+```text
+screenshots/calculator_sample_runs.png
+```
 
 ## Automated Testing
 
-Automated testing is implemented with `pytest`. The test suite runs the calculator as a separate process and evaluates its standard output, error output, exit status, and resistance to malformed input.
+The test suite uses `pytest` to evaluate the calculator as a separate process. The tests verify correct output, input validation, exit behavior, and resilience against malformed expressions.
 
-The suite covers:
+The test coverage includes:
 
-- Addition, subtraction, multiplication, division, and modulo.
-- Integer, decimal, negative, and scientific-notation operands.
-- Expressions containing additional whitespace.
-- Empty and incomplete input.
-- Incorrect operand and operator positions.
-- Non-numeric operands.
-- Unsupported operators.
-- Extra expression elements.
-- `NaN` and infinite values.
-- Division and modulo by zero.
-- Very large finite operands.
-- Script availability and unexpected program termination.
+- All five supported arithmetic operators
+- Integer, decimal, negative, and scientific-notation operands
+- Additional whitespace
+- Empty and incomplete expressions
+- Incorrect token positions
+- Non-numeric operands
+- Unsupported operators
+- Extra input elements
+- `NaN` and infinite values
+- Division and modulo by zero
+- Very large numeric inputs
+- Unexpected program termination
 
-The test suite is executed from the project root with:
+The test suite was executed with:
 
 ```powershell
 python -m pytest -v
 ```
 
-## Test Results
-
-The recorded test session used Python 3.12.13 and pytest 9.1.1 within the active `calara_lab1` Conda environment.
+The recorded result was:
 
 ```text
-Collected tests: 25
-Passed: 25
-Failed: 0
-Result: 25 passed in 1.60s
+Tests collected: 25
+Tests passed: 25
+Tests failed: 0
+Completion time: 1.60 seconds
 ```
 
-The completed test output is documented in `screenshots/pytest_results.png`.
+The full test-session evidence is stored in:
 
-## Evidence and Screenshots
+```text
+screenshots/pytest_results.png
+```
 
-The `screenshots/` directory contains supporting evidence for the laboratory activity:
+## Git Repository and Version Control
 
-- `conda_environment_activation.png` documents the active Conda environment, Python version, and interpreter path.
-- `calculator_sample_runs.png` documents valid and invalid calculator executions.
-- `pytest_results.png` documents the successful automated test session.
-- `github_commit_history.png` documents the repository's version-control history.
+A Git repository was established for the project to track changes to the source code, tests, documentation, and screenshots. The repository uses the `main` branch and is connected to a remote GitHub repository.
 
-## Project Results
+The basic version-control workflow demonstrated in the activity included:
 
-The calculator successfully performs the five supported arithmetic operations and rejects malformed, unsupported, or unsafe input. The automated test session completed with all 25 test cases passing.
+```powershell
+git status
+git add .
+git commit -m "Descriptive commit message"
+git pull --rebase origin main
+git push origin main
+git log --oneline
+```
 
-The project also satisfies the organizational requirements of the activity by separating application code, test code, documentation, and evidence into appropriate repository locations.
+These operations documented the following version-control concepts:
+
+- Inspecting the working tree
+- Staging project changes
+- Creating meaningful commits
+- Reviewing commit history
+- Integrating remote changes
+- Resolving a README merge conflict during rebase
+- Synchronizing the local `main` branch with GitHub
+
+The repository contains more than the required three meaningful commits. The commit history records the initial repository setup, project documentation, additional screenshot evidence, README revisions, and final documentation updates.
+
+Git commit-history evidence is stored in:
+
+```text
+screenshots/github_commit_history.png
+```
+
+The remote repository is available at:
+
+https://github.com/Rectorify/CPE106L_LAB-1
+
+## Evidence Summary
+
+The project evidence is organized in the `screenshots/` directory:
+
+- `conda_environment_activation.png` — active Conda environment, Python version, and interpreter path
+- `calculator_sample_runs.png` — valid and invalid calculator executions
+- `pytest_results.png` — automated test execution showing 25 passing tests
+- `github_commit_history.png` — GitHub commit history showing meaningful version-control activity
+
+## Results
+
+The activity produced an organized Python workspace with separate source, test, documentation, and evidence components. An isolated Conda environment was used in place of WSL because of laboratory administrator restrictions. The calculator executed correctly, and all 25 automated tests passed.
+
+The Git repository documented the development process through multiple meaningful commits and was synchronized with GitHub. The screenshots provide evidence of environment activation, program execution, automated testing, and basic version-control operations.
+
+## Submission Contents
+
+The submitted project folder contains:
+
+```text
+README.md
+src/calculator.py
+tests/test_calculator.py
+screenshots/
+```
+
+The complete folder is uploaded to the designated Drive location with link access enabled for evaluation. The GitHub repository provides an additional copy of the source files and the recorded version-control history.
+
+## Author
+
+**John Steven B. Calara**  
+CPE106L-4 Software Design Laboratory
